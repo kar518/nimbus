@@ -1,0 +1,41 @@
+# --- Web framework ---
+fastapi==0.115.6
+uvicorn[standard]==0.32.1
+
+# --- Settings & validation ---
+pydantic==2.10.3
+pydantic-settings==2.6.1
+email-validator==2.2.0
+
+# --- Database ---
+sqlalchemy==2.0.36
+asyncpg==0.30.0
+psycopg2-binary==2.9.10
+alembic==1.14.0
+
+# --- Caching / broker ---
+redis==5.2.1
+
+# --- Background jobs ---
+celery==5.4.0
+flower==2.0.1
+
+# --- Auth / security ---
+python-jose[cryptography]==3.3.0
+passlib[bcrypt]==1.7.4
+python-multipart==0.0.19
+
+# --- Observability ---
+structlog==24.4.0
+
+# --- HTTP client (service-to-service, health checks) ---
+httpx==0.28.1
+
+# --- Testing ---
+pytest==8.3.4
+pytest-asyncio==0.24.0
+pytest-cov==6.0.0
+
+# --- Dev tooling ---
+ruff==0.8.4
+mypy==1.13.0

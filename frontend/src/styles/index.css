@@ -1,0 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    @apply antialiased;
+  }
+
+  body {
+    @apply bg-surface-950 text-surface-50;
+  }
+
+  ::selection {
+    @apply bg-accent/30 text-surface-50;
+  }
+}
+
+@layer utilities {
+  /* Consistent focus ring across custom interactive elements. */
+  .focus-ring {
+    @apply outline-none ring-2 ring-accent ring-offset-2 ring-offset-surface-950;
+  }
+}

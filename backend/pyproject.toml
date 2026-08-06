@@ -1,0 +1,33 @@
+[project]
+name = "nimbus-backend"
+version = "0.1.0"
+description = "Nimbus - AI Workload Scheduling and GPU Resource Management Platform (API)"
+requires-python = ">=3.12"
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+exclude = ["alembic/versions"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "N", "C4", "SIM"]
+ignore = ["B008"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["app"]
+
+[tool.mypy]
+python_version = "3.12"
+plugins = ["pydantic.mypy"]
+strict = true
+ignore_missing_imports = true
+exclude = ["alembic"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["app/tests"]
+env_files = [".env.test"]
+
+[tool.coverage.run]
+source = ["app"]
+omit = ["app/tests/*", "alembic/*"]

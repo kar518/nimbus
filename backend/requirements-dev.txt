@@ -1,0 +1,7 @@
+-r requirements.txt
+
+# Local dev quality-of-life
+ipython==8.30.0
+watchfiles==1.0.3
+pre-commit==4.0.1
+pytest-env==1.1.5
