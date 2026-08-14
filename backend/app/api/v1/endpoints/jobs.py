@@ -1,7 +1,7 @@
 """
 Job submission endpoints.
 
-Only creation is implemented here. Listing, cancellation, scheduling, and
+Creation and listing are implemented here. Cancellation, scheduling, and
 worker assignment are out of scope for this feature — see the root
 README's roadmap.
 """
@@ -20,3 +20,9 @@ router = APIRouter(tags=["jobs"])
 async def submit_job(job_in: JobCreate, db: AsyncSession = Depends(get_db)) -> JobResponse:
     job = await job_service.create_job(db, job_in)
     return JobResponse.model_validate(job)
+
+
+@router.get("", response_model=list[JobResponse])
+async def list_jobs(db: AsyncSession = Depends(get_db)) -> list[JobResponse]:
+    jobs = await job_service.get_jobs(db)
+    return [JobResponse.model_validate(job) for job in jobs]
