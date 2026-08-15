@@ -11,8 +11,9 @@ As resources are implemented, include them here, e.g.:
 
 from fastapi import APIRouter
 
-from app.api.v1.endpoints import health, jobs
+from app.api.v1.endpoints import health, jobs, workers
 
 api_router = APIRouter()
 api_router.include_router(health.router)
 api_router.include_router(jobs.router, prefix="/jobs")
+api_router.include_router(workers.router, prefix="/workers", tags=["workers"])
