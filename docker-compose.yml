@@ -81,7 +81,7 @@ services:
       context: ./backend
       target: production
     restart: unless-stopped
-    command: ["celery", "-A", "app.workers.celery_app", "worker", "--loglevel=info"]
+    command: ["celery", "-A", "app.workers.celery_app", "worker", "--loglevel=info", "-Q", "nimbus.default,nimbus.scheduling"]
     environment:
       <<: *backend-env
     depends_on:

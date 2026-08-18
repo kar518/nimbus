@@ -1,20 +1,2 @@
-import { LayoutDashboard } from "lucide-react";
-
-import { EmptyState } from "@/components/common/EmptyState";
-import { PageHeader } from "@/components/common/PageHeader";
-
-export function DashboardPage() {
-  return (
-    <>
-      <PageHeader
-        title="Dashboard"
-        description="Cluster-wide overview of queue depth, worker utilization, and recent activity."
-      />
-      <EmptyState
-        icon={LayoutDashboard}
-        title="No data source connected yet"
-        description="This page will summarize queue status, GPU utilization, and recent job activity once the API endpoints and data hooks are implemented."
-      />
-    </>
-  );
-}
+import {Activity,CheckCircle2,ListTodo,Server} from "lucide-react";import {PageHeader} from "@/components/common/PageHeader";import {useClusterData} from "@/hooks/useClusterData";
+export function DashboardPage(){const{workers,jobs,loading}=useClusterData();const cards=[['Workers online',`${workers.filter(w=>w.status!=="OFFLINE").length}/${workers.length}`,Server],['Running jobs',jobs.filter(j=>j.status==='RUNNING').length,Activity],['Queued jobs',jobs.filter(j=>j.status==='QUEUED').length,ListTodo],['Completed',jobs.filter(j=>j.status==='COMPLETED').length,CheckCircle2]];return <><PageHeader title="Dashboard" description="Live overview of the Nimbus GPU cluster and job queue."/>{loading?<p className="text-sm text-surface-400">Loading…</p>:<div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">{cards.map(([label,value,Icon])=><div key={String(label)} className="rounded-lg border border-surface-800 bg-surface-900 p-5"><Icon className="h-5 w-5 text-surface-400"/><p className="mt-3 text-sm text-surface-400">{label}</p><p className="mt-1 text-2xl font-semibold">{value}</p></div>)}</div>}</>}
