@@ -1,6 +1,6 @@
 [project]
 name = "nimbus-backend"
-version = "0.1.0"
+version = "0.2.0"
 description = "Nimbus - AI Workload Scheduling and GPU Resource Management Platform (API)"
 requires-python = ">=3.12"
 
@@ -26,7 +26,7 @@ exclude = ["alembic"]
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
 testpaths = ["app/tests"]
-env_files = [".env.test"]
+asyncio_default_fixture_loop_scope = "function"
 
 [tool.coverage.run]
 source = ["app"]

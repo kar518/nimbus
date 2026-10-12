@@ -1,7 +1,7 @@
 """add worker heartbeat
 
 Revision ID: a2c3d4e5f6a7
-Revises: 7fe5fea5128e
+Revises: b1c2d3e4f5a6
 """
 
 from collections.abc import Sequence
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 from alembic import op
 
 revision: str = "a2c3d4e5f6a7"
-down_revision: str | None = "7fe5fea5128e"
+down_revision: str | None = "b1c2d3e4f5a6"
 branch_labels: str | Sequence[str] | None = None
 depends_on: str | Sequence[str] | None = None
 

@@ -1,7 +1,10 @@
 -r requirements.txt
-
-# Local dev quality-of-life
+pytest==9.1.1
+pytest-asyncio==1.4.0
+pytest-cov==6.0.0
+ruff==0.8.4
+mypy==1.13.0
 ipython==8.30.0
 watchfiles==1.0.3
 pre-commit==4.0.1
-pytest-env==1.1.5
+pip-audit==2.10.1

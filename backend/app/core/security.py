@@ -1,46 +1,62 @@
-"""
-Security primitives: password hashing and JWT encode/decode.
-
-This module intentionally contains only generic, reusable auth
-infrastructure. Anything workload/scheduling-specific belongs in
-`app.services`, not here.
-"""
-
+import hashlib
+import hmac
+import os
 from datetime import UTC, datetime, timedelta
 from typing import Any
 
-from jose import JWTError, jwt
-from passlib.context import CryptContext
+import jwt
 
 from app.core.config import settings
 
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
-
 
 def hash_password(plain_password: str) -> str:
-    return pwd_context.hash(plain_password)
+    salt = os.urandom(16).hex()
+    digest = hashlib.pbkdf2_hmac("sha256", plain_password.encode(), salt.encode(), 600_000).hex()
+    return f"pbkdf2_sha256$600000${salt}${digest}"
 
 
 def verify_password(plain_password: str, hashed_password: str) -> bool:
-    return pwd_context.verify(plain_password, hashed_password)
+    try:
+        algorithm, iterations, salt, expected = hashed_password.split("$")
+        if algorithm != "pbkdf2_sha256":
+            return False
+        actual = hashlib.pbkdf2_hmac(
+            "sha256", plain_password.encode(), salt.encode(), int(iterations)
+        ).hex()
+        return hmac.compare_digest(actual, expected)
+    except (ValueError, TypeError):
+        return False
 
 
 def create_access_token(
-    subject: str,
-    expires_delta: timedelta | None = None,
-    extra_claims: dict[str, Any] | None = None,
+    subject: str, expires_delta: timedelta | None = None, extra_claims: dict[str, Any] | None = None
 ) -> str:
-    expire = datetime.now(UTC) + (
-        expires_delta or timedelta(minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES)
-    )
-    to_encode: dict[str, Any] = {"sub": subject, "exp": expire}
-    if extra_claims:
-        to_encode.update(extra_claims)
-    return jwt.encode(to_encode, settings.SECRET_KEY, algorithm=settings.ALGORITHM)
+    payload: dict[str, Any] = {
+        "sub": subject,
+        "kind": "user",
+        "exp": datetime.now(UTC)
+        + (expires_delta or timedelta(minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES)),
+    }
+    payload.update(extra_claims or {})
+    return jwt.encode(payload, settings.SECRET_KEY, algorithm="HS256")
 
 
 def decode_access_token(token: str) -> dict[str, Any] | None:
     try:
-        return jwt.decode(token, settings.SECRET_KEY, algorithms=[settings.ALGORITHM])
-    except JWTError:
+        return jwt.decode(
+            token,
+            settings.SECRET_KEY,
+            algorithms=["HS256"],
+            options={"require": ["exp", "sub", "kind"]},
+        )
+    except jwt.InvalidTokenError:
         return None
+
+
+def worker_bootstrap_token() -> str:
+    return (
+        settings.WORKER_API_TOKEN
+        or hmac.new(
+            settings.SECRET_KEY.encode(), b"nimbus-worker-registration-v1", hashlib.sha256
+        ).hexdigest()
+    )

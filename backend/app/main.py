@@ -8,9 +8,9 @@ Run in a container via the `development` or `production` Dockerfile stage
 (see docker-compose.yml).
 """
 
+import asyncio
 from collections.abc import AsyncGenerator
 from contextlib import asynccontextmanager
-import asyncio
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
@@ -32,7 +32,9 @@ async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
     try:
         yield
     finally:
-        stop_event.set(); bridge.cancel(); await asyncio.gather(bridge, return_exceptions=True)
+        stop_event.set()
+        bridge.cancel()
+        await asyncio.gather(bridge, return_exceptions=True)
         logger.info("nimbus.shutdown")
 
 
@@ -40,7 +42,7 @@ def create_app() -> FastAPI:
     app = FastAPI(
         title=settings.PROJECT_NAME,
         description="AI Workload Scheduling and GPU Resource Management Platform",
-        version="0.1.0",
+        version="0.2.0",
         openapi_url=f"{settings.API_V1_PREFIX}/openapi.json",
         docs_url=f"{settings.API_V1_PREFIX}/docs",
         redoc_url=f"{settings.API_V1_PREFIX}/redoc",
@@ -50,7 +52,7 @@ def create_app() -> FastAPI:
     if settings.BACKEND_CORS_ORIGINS:
         app.add_middleware(
             CORSMiddleware,
-            allow_origins=[str(origin) for origin in settings.BACKEND_CORS_ORIGINS],
+            allow_origins=[str(origin).rstrip("/") for origin in settings.BACKEND_CORS_ORIGINS],
             allow_credentials=True,
             allow_methods=["*"],
             allow_headers=["*"],

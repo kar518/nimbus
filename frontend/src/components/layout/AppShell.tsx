@@ -1,15 +1,24 @@
 import type { PropsWithChildren } from "react";
-
-import { Sidebar } from "@/components/layout/Sidebar";
-import { Topbar } from "@/components/layout/Topbar";
-
+import { Sidebar } from "./Sidebar";
+import { Topbar } from "./Topbar";
+import { useLiveUpdates } from "@/hooks/useClusterData";
 export function AppShell({ children }: PropsWithChildren) {
+  const live = useLiveUpdates();
   return (
-    <div className="flex h-screen overflow-hidden bg-surface-950">
+    <div className="app-shell">
+      <a className="skip-link" href="#main-content">
+        Skip to content
+      </a>
       <Sidebar />
-      <div className="flex flex-1 flex-col overflow-hidden">
-        <Topbar />
-        <main className="flex-1 overflow-y-auto p-6">{children}</main>
+      <div className="main-column">
+        <Topbar live={live} />
+        <main id="main-content" className="main-content">
+          {children}
+          <footer className="page-footer">
+            <span>Nimbus · compute with clarity</span>
+            <span>Isolated execution. Observable outcomes.</span>
+          </footer>
+        </main>
       </div>
     </div>
   );

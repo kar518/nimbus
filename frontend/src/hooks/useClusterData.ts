@@ -1,86 +1,70 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-
 import { apiClient } from "@/api/client";
-import type { Job, Worker } from "@/types/api";
+import type { Job, Summary, Worker } from "@/types/api";
 
-const WS_BASE_URL = import.meta.env.VITE_WS_BASE_URL ?? "ws://localhost:8000/api/v1";
-const RECONNECT_DELAY_MS = 3_000;
-
-/**
- * Fetches the current workers + jobs from the backend, then keeps them
- * live by listening on the `/ws` WebSocket for worker heartbeat/status
- * events and job assignment/status events (see
- * `app.services.event_bus` / `app.services.ws_manager` on the backend).
- *
- * Any event just invalidates the two queries rather than trying to
- * patch the cache in place — the lists are small, so a refetch is cheap
- * and keeps this hook simple and correct even as new event types are
- * added on the backend.
- */
-export function useClusterData() {
-  const queryClient = useQueryClient();
-  const socketRef = useRef<WebSocket | null>(null);
-
-  const workersQuery = useQuery({
-    queryKey: ["workers"],
-    queryFn: async () => {
-      const { data } = await apiClient.get<Worker[]>("/workers");
-      return data;
-    },
-    refetchInterval: 30_000,
-  });
-
-  const jobsQuery = useQuery({
-    queryKey: ["jobs"],
-    queryFn: async () => {
-      const { data } = await apiClient.get<Job[]>("/jobs");
-      return data;
-    },
-    refetchInterval: 30_000,
-  });
-
+export function useLiveUpdates() {
+  const cache = useQueryClient();
+  const [connected, setConnected] = useState(false);
   useEffect(() => {
-    let cancelled = false;
-    let reconnectTimer: ReturnType<typeof setTimeout> | undefined;
-
+    let closed = false;
+    let socket: WebSocket | undefined;
+    let timer: ReturnType<typeof setTimeout> | undefined;
+    const configured = import.meta.env.VITE_WS_BASE_URL;
+    const base =
+      (configured?.startsWith("/")
+        ? `${location.protocol === "https:" ? "wss:" : "ws:"}//${location.host}${configured}`
+        : configured) ??
+      `${location.protocol === "https:" ? "wss:" : "ws:"}//${location.host}/api/v1`;
     const connect = () => {
-      if (cancelled) return;
-
-      const socket = new WebSocket(`${WS_BASE_URL}/ws`);
-      socketRef.current = socket;
-
+      if (closed) return;
+      socket = new WebSocket(`${base}/ws`);
+      socket.onopen = () => {
+        setConnected(true);
+        void cache.invalidateQueries();
+      };
       socket.onmessage = () => {
-        // Any live event (worker heartbeat/status, job assignment/status)
-        // just triggers a refetch of both lists.
-        queryClient.invalidateQueries({ queryKey: ["workers"] });
-        queryClient.invalidateQueries({ queryKey: ["jobs"] });
+        ["workers", "jobs", "job", "summary", "logs", "artifacts"].forEach((key) => {
+          void cache.invalidateQueries({ queryKey: [key] });
+        });
       };
-
       socket.onclose = () => {
-        if (!cancelled) {
-          reconnectTimer = setTimeout(connect, RECONNECT_DELAY_MS);
-        }
+        setConnected(false);
+        if (!closed) timer = setTimeout(connect, 3000);
       };
-
-      socket.onerror = () => {
-        socket.close();
-      };
+      socket.onerror = () => socket?.close();
     };
-
     connect();
-
     return () => {
-      cancelled = true;
-      if (reconnectTimer) clearTimeout(reconnectTimer);
-      socketRef.current?.close();
-      socketRef.current = null;
+      closed = true;
+      clearTimeout(timer);
+      socket?.close();
     };
-  }, [queryClient]);
+  }, [cache]);
+  return connected;
+}
 
+export function useClusterData() {
+  const workers = useQuery({
+    queryKey: ["workers"],
+    queryFn: async () => (await apiClient.get<Worker[]>("/workers")).data,
+    refetchInterval: 10_000,
+  });
+  const jobs = useQuery({
+    queryKey: ["jobs", "recent"],
+    queryFn: async () => (await apiClient.get<Job[]>("/jobs", { params: { limit: 8 } })).data,
+    refetchInterval: 10_000,
+  });
+  const summary = useQuery({
+    queryKey: ["summary"],
+    queryFn: async () => (await apiClient.get<Summary>("/jobs/summary")).data,
+    refetchInterval: 10_000,
+  });
   return {
-    workers: workersQuery.data ?? [],
-    jobs: jobsQuery.data ?? [],
-    loading: workersQuery.isLoading || jobsQuery.isLoading,
+    workers: workers.data ?? [],
+    jobs: jobs.data ?? [],
+    summary: summary.data,
+    loading: workers.isPending || jobs.isPending || summary.isPending,
+    error: workers.error ?? jobs.error ?? summary.error,
   };
 }

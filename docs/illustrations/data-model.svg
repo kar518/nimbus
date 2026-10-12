@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1030" viewBox="0 0 1600 1030"><text x="800" y="40" font-family="Arial, sans-serif" font-size="40" fill="#172B38" text-anchor="middle" dominant-baseline="middle" font-weight="700">Four tables and their reference relationships</text>
+<rect x="75" y="125" width="550" height="295" rx="16" fill="#EEF4F7" stroke="#2861A6" stroke-width="3"/>
+<text x="350.0" y="163" font-family="Arial, sans-serif" font-size="36" fill="#2861A6" text-anchor="middle" dominant-baseline="middle" font-weight="700">users</text>
+<text x="350.0" y="211" font-family="Arial, sans-serif" font-size="30" fill="#172B38" text-anchor="middle" dominant-baseline="middle" font-weight="400">id UUID primary key</text>
+<text x="350.0" y="249" font-family="Arial, sans-serif" font-size="30" fill="#172B38" text-anchor="middle" dominant-baseline="middle" font-weight="400">username unique</text>
+<text x="350.0" y="287" font-family="Arial, sans-serif" font-size="30" fill="#172B38" text-anchor="middle" dominant-baseline="middle" font-weight="400">password_hash and is_admin</text>
+<text x="350.0" y="325" font-family="Arial, sans-serif" font-size="30" fill="#172B38" text-anchor="middle" dominant-baseline="middle" font-weight="400">created_at</text>
+<rect x="975" y="125" width="550" height="295" rx="16" fill="#EEF4F7" stroke="#087F70" stroke-width="3"/>
+<text x="1250.0" y="163" font-family="Arial, sans-serif" font-size="36" fill="#087F70" text-anchor="middle" dominant-baseline="middle" font-weight="700">jobs</text>
+<text x="1250.0" y="211" font-family="Arial, sans-serif" font-size="30" fill="#172B38" text-anchor="middle" dominant-baseline="middle" font-weight="400">id UUID primary key</text>
+<text x="1250.0" y="249" font-family="Arial, sans-serif" font-size="30" fill="#172B38" text-anchor="middle" dominant-baseline="middle" font-weight="400">owner_id worker_id retry_of</text>
+<text x="1250.0" y="287" font-family="Arial, sans-serif" font-size="30" fill="#172B38" text-anchor="middle" dominant-baseline="middle" font-weight="400">config state lease logs</text>
+<text x="1250.0" y="325" font-family="Arial, sans-serif" font-size="30" fill="#172B38" text-anchor="middle" dominant-baseline="middle" font-weight="400">lifecycle timestamps</text>
+<rect x="75" y="660" width="550" height="255" rx="16" fill="#EEF4F7" stroke="#7952AD" stroke-width="3"/>
+<text x="350.0" y="698" font-family="Arial, sans-serif" font-size="36" fill="#7952AD" text-anchor="middle" dominant-baseline="middle" font-weight="700">workers</text>
+<text x="350.0" y="746" font-family="Arial, sans-serif" font-size="30" fill="#172B38" text-anchor="middle" dominant-baseline="middle" font-weight="400">id and session_id</text>
+<text x="350.0" y="784" font-family="Arial, sans-serif" font-size="30" fill="#172B38" text-anchor="middle" dominant-baseline="middle" font-weight="400">name capacity status</text>
+<text x="350.0" y="822" font-family="Arial, sans-serif" font-size="30" fill="#172B38" text-anchor="middle" dominant-baseline="middle" font-weight="400">current_job last_heartbeat</text>
+<rect x="975" y="660" width="550" height="255" rx="16" fill="#EEF4F7" stroke="#2861A6" stroke-width="3"/>
+<text x="1250.0" y="698" font-family="Arial, sans-serif" font-size="36" fill="#2861A6" text-anchor="middle" dominant-baseline="middle" font-weight="700">artifacts</text>
+<text x="1250.0" y="746" font-family="Arial, sans-serif" font-size="30" fill="#172B38" text-anchor="middle" dominant-baseline="middle" font-weight="400">id UUID primary key</text>
+<text x="1250.0" y="784" font-family="Arial, sans-serif" font-size="30" fill="#172B38" text-anchor="middle" dominant-baseline="middle" font-weight="400">job_id foreign key</text>
+<text x="1250.0" y="822" font-family="Arial, sans-serif" font-size="30" fill="#172B38" text-anchor="middle" dominant-baseline="middle" font-weight="400">filename size content bytes</text>
+<polyline points="975,220 625,220" fill="none" stroke="#546675" stroke-width="4" stroke-dasharray="12 10"/><polygon points="625,220 641.2080478423482,212.17062038599786 641.2080478423482,227.82937961400214" fill="#546675"/>
+<text x="800" y="178" font-family="Arial, sans-serif" font-size="25" fill="#172B38" text-anchor="middle" dominant-baseline="middle" font-weight="400">owner_id references user</text>
+<polyline points="1085,420 1085,550 625,550 625,730" fill="none" stroke="#546675" stroke-width="4" stroke-dasharray="12 10"/><polygon points="625,730 617.1706203859978,713.7919521576518 632.8293796140022,713.7919521576518" fill="#546675"/>
+<text x="840" y="605" font-family="Arial, sans-serif" font-size="26" fill="#172B38" text-anchor="middle" dominant-baseline="middle" font-weight="400">worker_id references worker</text>
+<polyline points="320,660 320,500 720,500 720,325 975,325" fill="none" stroke="#546675" stroke-width="4" stroke-dasharray="12 10"/><polygon points="975,325 958.7919521576518,332.82937961400216 958.7919521576518,317.17062038599784" fill="#546675"/>
+<text x="480" y="458" font-family="Arial, sans-serif" font-size="26" fill="#172B38" text-anchor="middle" dominant-baseline="middle" font-weight="400">current_job</text>
+<polyline points="1260,660 1260,420" fill="none" stroke="#2861A6" stroke-width="4" /><polygon points="1260,420 1267.8293796140022,436.2080478423482 1252.1706203859978,436.2080478423482" fill="#2861A6"/>
+<text x="1360" y="540" font-family="Arial, sans-serif" font-size="26" fill="#2861A6" text-anchor="middle" dominant-baseline="middle" font-weight="400">job_id FK</text>
+<text x="800" y="971" font-family="Arial, sans-serif" font-size="28" fill="#172B38" text-anchor="middle" dominant-baseline="middle" font-weight="400">retry_of logically links a new job to an earlier job in the same jobs table</text></svg>

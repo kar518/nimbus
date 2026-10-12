@@ -33,3 +33,9 @@ Thumbs.db
 
 # --- Logs ---
 *.log
+
+# Build metadata and scheduler runtime
+*.tsbuildinfo
+celerybeat-schedule*
+
+.nimbus/

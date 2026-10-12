@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1030" viewBox="0 0 1600 1030"><text x="800" y="40" font-family="Arial, sans-serif" font-size="38" fill="#172B38" text-anchor="middle" dominant-baseline="middle" font-weight="700">Services that coordinate work and the host that runs it</text>
+<rect x="40" y="105" width="370" height="170" rx="16" fill="#EEF4F7" stroke="#2861A6" stroke-width="3"/>
+<text x="225.0" y="143" font-family="Arial, sans-serif" font-size="36" fill="#2861A6" text-anchor="middle" dominant-baseline="middle" font-weight="700">React workspace</text>
+<text x="225.0" y="191" font-family="Arial, sans-serif" font-size="30" fill="#172B38" text-anchor="middle" dominant-baseline="middle" font-weight="400">Submit and view</text>
+<text x="225.0" y="229" font-family="Arial, sans-serif" font-size="30" fill="#172B38" text-anchor="middle" dominant-baseline="middle" font-weight="400">Authorized API refresh</text>
+<rect x="610" y="105" width="370" height="170" rx="16" fill="#EEF4F7" stroke="#087F70" stroke-width="3"/>
+<text x="795.0" y="143" font-family="Arial, sans-serif" font-size="36" fill="#087F70" text-anchor="middle" dominant-baseline="middle" font-weight="700">FastAPI</text>
+<text x="795.0" y="191" font-family="Arial, sans-serif" font-size="30" fill="#172B38" text-anchor="middle" dominant-baseline="middle" font-weight="400">Validate and authorize</text>
+<text x="795.0" y="229" font-family="Arial, sans-serif" font-size="30" fill="#172B38" text-anchor="middle" dominant-baseline="middle" font-weight="400">Leased worker protocol</text>
+<rect x="1190" y="105" width="370" height="170" rx="16" fill="#EEF4F7" stroke="#2861A6" stroke-width="3"/>
+<text x="1375.0" y="143" font-family="Arial, sans-serif" font-size="36" fill="#2861A6" text-anchor="middle" dominant-baseline="middle" font-weight="700">PostgreSQL</text>
+<text x="1375.0" y="191" font-family="Arial, sans-serif" font-size="30" fill="#172B38" text-anchor="middle" dominant-baseline="middle" font-weight="400">Jobs and workers</text>
+<text x="1375.0" y="229" font-family="Arial, sans-serif" font-size="30" fill="#172B38" text-anchor="middle" dominant-baseline="middle" font-weight="400">Accounts logs artifacts</text>
+<rect x="40" y="420" width="370" height="170" rx="16" fill="#EEF4F7" stroke="#7952AD" stroke-width="3"/>
+<text x="225.0" y="458" font-family="Arial, sans-serif" font-size="36" fill="#7952AD" text-anchor="middle" dominant-baseline="middle" font-weight="700">Celery Beat</text>
+<text x="225.0" y="506" font-family="Arial, sans-serif" font-size="30" fill="#172B38" text-anchor="middle" dominant-baseline="middle" font-weight="400">Periodic scheduling</text>
+<text x="225.0" y="544" font-family="Arial, sans-serif" font-size="30" fill="#172B38" text-anchor="middle" dominant-baseline="middle" font-weight="400">Every 5 seconds</text>
+<rect x="610" y="420" width="370" height="170" rx="16" fill="#EEF4F7" stroke="#7952AD" stroke-width="3"/>
+<text x="795.0" y="458" font-family="Arial, sans-serif" font-size="36" fill="#7952AD" text-anchor="middle" dominant-baseline="middle" font-weight="700">Celery worker</text>
+<text x="795.0" y="506" font-family="Arial, sans-serif" font-size="30" fill="#172B38" text-anchor="middle" dominant-baseline="middle" font-weight="400">Runs scheduling cycles</text>
+<text x="795.0" y="544" font-family="Arial, sans-serif" font-size="30" fill="#172B38" text-anchor="middle" dominant-baseline="middle" font-weight="400">Chooses assignments</text>
+<rect x="1190" y="420" width="370" height="170" rx="16" fill="#EEF4F7" stroke="#2861A6" stroke-width="3"/>
+<text x="1375.0" y="458" font-family="Arial, sans-serif" font-size="36" fill="#2861A6" text-anchor="middle" dominant-baseline="middle" font-weight="700">Redis</text>
+<text x="1375.0" y="506" font-family="Arial, sans-serif" font-size="30" fill="#172B38" text-anchor="middle" dominant-baseline="middle" font-weight="400">Broker and live events</text>
+<text x="1375.0" y="544" font-family="Arial, sans-serif" font-size="30" fill="#172B38" text-anchor="middle" dominant-baseline="middle" font-weight="400">Login attempt counters</text>
+<rect x="610" y="750" width="370" height="170" rx="16" fill="#EEF4F7" stroke="#087F70" stroke-width="3"/>
+<text x="795.0" y="788" font-family="Arial, sans-serif" font-size="36" fill="#087F70" text-anchor="middle" dominant-baseline="middle" font-weight="700">Host agent</text>
+<text x="795.0" y="836" font-family="Arial, sans-serif" font-size="30" fill="#172B38" text-anchor="middle" dominant-baseline="middle" font-weight="400">Poll and supervise</text>
+<text x="795.0" y="874" font-family="Arial, sans-serif" font-size="30" fill="#172B38" text-anchor="middle" dominant-baseline="middle" font-weight="400">Trusted Docker access</text>
+<rect x="1190" y="750" width="370" height="170" rx="16" fill="#EEF4F7" stroke="#087F70" stroke-width="3"/>
+<text x="1375.0" y="788" font-family="Arial, sans-serif" font-size="36" fill="#087F70" text-anchor="middle" dominant-baseline="middle" font-weight="700">Docker workload</text>
+<text x="1375.0" y="836" font-family="Arial, sans-serif" font-size="30" fill="#172B38" text-anchor="middle" dominant-baseline="middle" font-weight="400">Actual command runs</text>
+<text x="1375.0" y="874" font-family="Arial, sans-serif" font-size="30" fill="#172B38" text-anchor="middle" dominant-baseline="middle" font-weight="400">Temporary output mount</text>
+<polyline points="410,180 610,180" fill="none" stroke="#2861A6" stroke-width="4" /><polygon points="610,180 593.7919521576518,187.82937961400214 593.7919521576518,172.17062038599786" fill="#2861A6"/>
+<text x="510" y="148" font-family="Arial, sans-serif" font-size="30" fill="#2861A6" text-anchor="middle" dominant-baseline="middle" font-weight="400">HTTP</text>
+<polyline points="980,180 1190,180" fill="none" stroke="#2861A6" stroke-width="4" /><polygon points="1190,180 1173.7919521576518,187.82937961400214 1173.7919521576518,172.17062038599786" fill="#2861A6"/>
+<text x="1085" y="148" font-family="Arial, sans-serif" font-size="27" fill="#2861A6" text-anchor="middle" dominant-baseline="middle" font-weight="400">Read and write</text>
+<polyline points="410,505 610,505" fill="none" stroke="#7952AD" stroke-width="4" /><polygon points="610,505 593.7919521576518,512.8293796140022 593.7919521576518,497.17062038599784" fill="#7952AD"/>
+<text x="510" y="458" font-family="Arial, sans-serif" font-size="27" fill="#7952AD" text-anchor="middle" dominant-baseline="middle" font-weight="400">Task via Redis</text>
+<polyline points="1190,510 980,510" fill="none" stroke="#7952AD" stroke-width="4" /><polygon points="980,510 996.2080478423482,502.17062038599784 996.2080478423482,517.8293796140022" fill="#7952AD"/>
+<text x="1080" y="475" font-family="Arial, sans-serif" font-size="27" fill="#7952AD" text-anchor="middle" dominant-baseline="middle" font-weight="400">Broker tasks</text>
+<polyline points="980,235 1090,235 1090,380 1270,380 1270,420" fill="none" stroke="#2861A6" stroke-width="4" /><polygon points="1270,420 1262.1706203859978,403.7919521576518 1277.8293796140022,403.7919521576518" fill="#2861A6"/>
+<text x="1375" y="330" font-family="Arial, sans-serif" font-size="28" fill="#2861A6" text-anchor="middle" dominant-baseline="middle" font-weight="400">Live events</text>
+<polyline points="980,450 1150,450 1150,235 1190,235" fill="none" stroke="#546675" stroke-width="4" /><polygon points="1190,235 1173.7919521576518,242.82937961400214 1173.7919521576518,227.17062038599786" fill="#546675"/>
+<text x="900" y="325" font-family="Arial, sans-serif" font-size="26" fill="#546675" text-anchor="middle" dominant-baseline="middle" font-weight="400">Scheduling SQL</text>
+<polyline points="690,750 690,670 475,670 475,235 610,235" fill="none" stroke="#087F70" stroke-width="4" /><polygon points="610,235 593.7919521576518,242.82937961400214 593.7919521576518,227.17062038599786" fill="#087F70"/>
+<text x="210" y="660" font-family="Arial, sans-serif" font-size="30" fill="#087F70" text-anchor="middle" dominant-baseline="middle" font-weight="400">Agent polls API</text>
+<text x="210" y="705" font-family="Arial, sans-serif" font-size="30" fill="#087F70" text-anchor="middle" dominant-baseline="middle" font-weight="400">and reports outcomes</text>
+<polyline points="980,830 1190,830" fill="none" stroke="#087F70" stroke-width="4" /><polygon points="1190,830 1173.7919521576518,837.8293796140022 1173.7919521576518,822.1706203859978" fill="#087F70"/>
+<text x="1080" y="797" font-family="Arial, sans-serif" font-size="27" fill="#087F70" text-anchor="middle" dominant-baseline="middle" font-weight="400">Docker CLI</text>
+<text x="800" y="984" font-family="Arial, sans-serif" font-size="30" fill="#172B38" text-anchor="middle" dominant-baseline="middle" font-weight="400">Redis notifications trigger fresh API reads in the browser</text></svg>

@@ -1,25 +1,23 @@
-import type { PropsWithChildren, ReactNode } from "react";
-
-interface PageHeaderProps {
-  title: string;
-  description?: string;
-  actions?: ReactNode;
-}
-
+import type { ReactNode } from "react";
 export function PageHeader({
   title,
   description,
-  actions,
-  children,
-}: PropsWithChildren<PageHeaderProps>) {
+  action,
+  eyebrow = "WORKSPACE",
+}: {
+  title: string;
+  description: string;
+  action?: ReactNode;
+  eyebrow?: string;
+}) {
   return (
-    <div className="mb-6 flex items-start justify-between gap-4">
+    <div className="page-heading">
       <div>
-        <h2 className="text-lg font-semibold text-surface-50">{title}</h2>
-        {description && <p className="mt-1 text-sm text-surface-400">{description}</p>}
-        {children}
+        <p className="eyebrow">{eyebrow}</p>
+        <h1>{title}</h1>
+        <p className="page-description">{description}</p>
       </div>
-      {actions && <div className="flex items-center gap-2">{actions}</div>}
+      {action && <div className="heading-action">{action}</div>}
     </div>
   );
 }

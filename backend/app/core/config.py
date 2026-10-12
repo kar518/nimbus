@@ -8,11 +8,12 @@ Settings class with different environment values injected by Docker Compose
 or the deployment platform.
 """
 
+import json
 from functools import lru_cache
-from typing import Literal
+from typing import Annotated, Literal
 
-from pydantic import AnyHttpUrl, Field, PostgresDsn, field_validator
-from pydantic_settings import BaseSettings, SettingsConfigDict
+from pydantic import AnyHttpUrl, Field, PostgresDsn, ValidationInfo, field_validator
+from pydantic_settings import BaseSettings, NoDecode, SettingsConfigDict
 
 
 class Settings(BaseSettings):
@@ -36,13 +37,17 @@ class Settings(BaseSettings):
     ALGORITHM: str = "HS256"
 
     # --- CORS ---
-    BACKEND_CORS_ORIGINS: list[AnyHttpUrl] = []
+    BACKEND_CORS_ORIGINS: Annotated[list[AnyHttpUrl], NoDecode] = []
 
     @field_validator("BACKEND_CORS_ORIGINS", mode="before")
     @classmethod
     def assemble_cors_origins(cls, v: str | list[str]) -> list[str] | str:
-        if isinstance(v, str) and not v.startswith("["):
-            return [origin.strip() for origin in v.split(",") if origin.strip()]
+        if isinstance(v, str):
+            return (
+                json.loads(v)
+                if v.startswith("[")
+                else [origin.strip() for origin in v.split(",") if origin.strip()]
+            )
         return v
 
     # --- Database ---
@@ -56,7 +61,7 @@ class Settings(BaseSettings):
     DATABASE_ECHO: bool = False
 
     @property
-    def SQLALCHEMY_DATABASE_URI(self) -> str:
+    def SQLALCHEMY_DATABASE_URI(self) -> str:  # noqa: N802 - environment-style public settings API
         return str(
             PostgresDsn.build(
                 scheme="postgresql+asyncpg",
@@ -69,7 +74,7 @@ class Settings(BaseSettings):
         )
 
     @property
-    def SQLALCHEMY_SYNC_DATABASE_URI(self) -> str:
+    def SQLALCHEMY_SYNC_DATABASE_URI(self) -> str:  # noqa: N802 - environment-style public settings API
         """Sync URI used by Alembic migrations."""
         return str(
             PostgresDsn.build(
@@ -89,7 +94,7 @@ class Settings(BaseSettings):
     REDIS_PASSWORD: str | None = None
 
     @property
-    def REDIS_URL(self) -> str:
+    def REDIS_URL(self) -> str:  # noqa: N802 - environment-style public settings API
         auth = f":{self.REDIS_PASSWORD}@" if self.REDIS_PASSWORD else ""
         return f"redis://{auth}{self.REDIS_HOST}:{self.REDIS_PORT}/{self.REDIS_DB}"
 
@@ -99,7 +104,7 @@ class Settings(BaseSettings):
 
     @field_validator("CELERY_BROKER_URL", mode="after")
     @classmethod
-    def default_broker_url(cls, v: str | None, info) -> str:  # noqa: ANN001
+    def default_broker_url(cls, v: str | None, info: ValidationInfo) -> str:
         if v:
             return v
         redis_host = info.data.get("REDIS_HOST", "redis")
@@ -109,7 +114,7 @@ class Settings(BaseSettings):
 
     @field_validator("CELERY_RESULT_BACKEND", mode="after")
     @classmethod
-    def default_result_backend(cls, v: str | None, info) -> str:  # noqa: ANN001
+    def default_result_backend(cls, v: str | None, info: ValidationInfo) -> str:
         if v:
             return v
         redis_host = info.data.get("REDIS_HOST", "redis")
@@ -117,7 +122,10 @@ class Settings(BaseSettings):
         redis_db = info.data.get("REDIS_DB", 0)
         return f"redis://{redis_host}:{redis_port}/{redis_db}"
 
-    # --- GPU worker / scheduler (placeholders for future config, no logic yet) ---
+    SETUP_TOKEN: str | None = None
+    WORKER_API_TOKEN: str | None = None
+
+    # --- Worker liveness / scheduler ---
     WORKER_HEARTBEAT_INTERVAL_SECONDS: int = 15
     WORKER_HEARTBEAT_TIMEOUT_SECONDS: int = 45
     SCHEDULER_POLL_INTERVAL_SECONDS: int = 5

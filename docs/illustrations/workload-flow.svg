@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="410" viewBox="0 0 1600 410"><text x="800" y="42" font-family="Arial, sans-serif" font-size="40" fill="#172B38" text-anchor="middle" dominant-baseline="middle" font-weight="700">The workload journey</text>
+<rect x="25" y="105" width="280" height="170" rx="16" fill="#EEF4F7" stroke="#087F70" stroke-width="3"/>
+<text x="165.0" y="143" font-family="Arial, sans-serif" font-size="36" fill="#087F70" text-anchor="middle" dominant-baseline="middle" font-weight="700">1 Submit</text>
+<text x="165.0" y="191" font-family="Arial, sans-serif" font-size="30" fill="#172B38" text-anchor="middle" dominant-baseline="middle" font-weight="400">Browser</text>
+<text x="165.0" y="229" font-family="Arial, sans-serif" font-size="30" fill="#172B38" text-anchor="middle" dominant-baseline="middle" font-weight="400">API</text>
+<polyline points="305,190 339,190" fill="none" stroke="#546675" stroke-width="4" /><polygon points="339,190 322.7919521576518,197.82937961400214 322.7919521576518,182.17062038599786" fill="#546675"/>
+<rect x="342" y="105" width="280" height="170" rx="16" fill="#EEF4F7" stroke="#2861A6" stroke-width="3"/>
+<text x="482.0" y="143" font-family="Arial, sans-serif" font-size="36" fill="#2861A6" text-anchor="middle" dominant-baseline="middle" font-weight="700">2 Schedule</text>
+<text x="482.0" y="191" font-family="Arial, sans-serif" font-size="30" fill="#172B38" text-anchor="middle" dominant-baseline="middle" font-weight="400">Celery</text>
+<text x="482.0" y="229" font-family="Arial, sans-serif" font-size="30" fill="#172B38" text-anchor="middle" dominant-baseline="middle" font-weight="400">Database</text>
+<polyline points="622,190 656,190" fill="none" stroke="#546675" stroke-width="4" /><polygon points="656,190 639.7919521576518,197.82937961400214 639.7919521576518,182.17062038599786" fill="#546675"/>
+<rect x="659" y="105" width="280" height="170" rx="16" fill="#EEF4F7" stroke="#087F70" stroke-width="3"/>
+<text x="799.0" y="143" font-family="Arial, sans-serif" font-size="36" fill="#087F70" text-anchor="middle" dominant-baseline="middle" font-weight="700">3 Execute</text>
+<text x="799.0" y="191" font-family="Arial, sans-serif" font-size="30" fill="#172B38" text-anchor="middle" dominant-baseline="middle" font-weight="400">Host agent</text>
+<text x="799.0" y="229" font-family="Arial, sans-serif" font-size="30" fill="#172B38" text-anchor="middle" dominant-baseline="middle" font-weight="400">Docker</text>
+<polyline points="939,190 973,190" fill="none" stroke="#546675" stroke-width="4" /><polygon points="973,190 956.7919521576518,197.82937961400214 956.7919521576518,182.17062038599786" fill="#546675"/>
+<rect x="976" y="105" width="280" height="170" rx="16" fill="#EEF4F7" stroke="#2861A6" stroke-width="3"/>
+<text x="1116.0" y="143" font-family="Arial, sans-serif" font-size="36" fill="#2861A6" text-anchor="middle" dominant-baseline="middle" font-weight="700">4 Observe</text>
+<text x="1116.0" y="191" font-family="Arial, sans-serif" font-size="30" fill="#172B38" text-anchor="middle" dominant-baseline="middle" font-weight="400">Status</text>
+<text x="1116.0" y="229" font-family="Arial, sans-serif" font-size="30" fill="#172B38" text-anchor="middle" dominant-baseline="middle" font-weight="400">Logs</text>
+<polyline points="1256,190 1290,190" fill="none" stroke="#546675" stroke-width="4" /><polygon points="1290,190 1273.7919521576518,197.82937961400214 1273.7919521576518,182.17062038599786" fill="#546675"/>
+<rect x="1293" y="105" width="280" height="170" rx="16" fill="#EEF4F7" stroke="#087F70" stroke-width="3"/>
+<text x="1433.0" y="143" font-family="Arial, sans-serif" font-size="36" fill="#087F70" text-anchor="middle" dominant-baseline="middle" font-weight="700">5 Retrieve</text>
+<text x="1433.0" y="191" font-family="Arial, sans-serif" font-size="30" fill="#172B38" text-anchor="middle" dominant-baseline="middle" font-weight="400">Output files</text>
+<text x="800" y="338" font-family="Arial, sans-serif" font-size="31" fill="#172B38" text-anchor="middle" dominant-baseline="middle" font-weight="400">The database retains the record after the temporary container is removed</text></svg>

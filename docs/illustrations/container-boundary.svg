@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="940" viewBox="0 0 1600 940"><text x="800" y="45" font-family="Arial, sans-serif" font-size="40" fill="#172B38" text-anchor="middle" dominant-baseline="middle" font-weight="700">Execution controls and authority boundaries</text>
+<rect x="40" y="160" width="350" height="235" rx="16" fill="#EEF4F7" stroke="#2861A6" stroke-width="3"/>
+<text x="215.0" y="198" font-family="Arial, sans-serif" font-size="36" fill="#2861A6" text-anchor="middle" dominant-baseline="middle" font-weight="700">Nimbus API</text>
+<text x="215.0" y="246" font-family="Arial, sans-serif" font-size="30" fill="#172B38" text-anchor="middle" dominant-baseline="middle" font-weight="400">Worker identity</text>
+<text x="215.0" y="284" font-family="Arial, sans-serif" font-size="30" fill="#172B38" text-anchor="middle" dominant-baseline="middle" font-weight="400">Execution lease</text>
+<text x="215.0" y="322" font-family="Arial, sans-serif" font-size="30" fill="#172B38" text-anchor="middle" dominant-baseline="middle" font-weight="400">State and results</text>
+<rect x="470" y="110" width="1090" height="745" rx="16" fill="#F6FAF9" stroke="#087F70" stroke-width="3"/>
+<text x="1015" y="147" font-family="Arial, sans-serif" font-size="35" fill="#087F70" text-anchor="middle" dominant-baseline="middle" font-weight="700">Trusted worker host and Docker daemon</text>
+<rect x="550" y="220" width="400" height="250" rx="16" fill="#EEF4F7" stroke="#087F70" stroke-width="3"/>
+<text x="750.0" y="258" font-family="Arial, sans-serif" font-size="36" fill="#087F70" text-anchor="middle" dominant-baseline="middle" font-weight="700">Python host agent</text>
+<text x="750.0" y="306" font-family="Arial, sans-serif" font-size="30" fill="#172B38" text-anchor="middle" dominant-baseline="middle" font-weight="400">Controls Docker CLI</text>
+<text x="750.0" y="344" font-family="Arial, sans-serif" font-size="30" fill="#172B38" text-anchor="middle" dominant-baseline="middle" font-weight="400">Heartbeats and logs</text>
+<text x="750.0" y="382" font-family="Arial, sans-serif" font-size="30" fill="#172B38" text-anchor="middle" dominant-baseline="middle" font-weight="400">Time limit and cleanup</text>
+<rect x="1050" y="220" width="430" height="435" rx="16" fill="#EEF4F7" stroke="#7952AD" stroke-width="3"/>
+<text x="1265.0" y="258" font-family="Arial, sans-serif" font-size="36" fill="#7952AD" text-anchor="middle" dominant-baseline="middle" font-weight="700">Workload container</text>
+<text x="1265.0" y="306" font-family="Arial, sans-serif" font-size="30" fill="#172B38" text-anchor="middle" dominant-baseline="middle" font-weight="400">Image and command</text>
+<text x="1265.0" y="344" font-family="Arial, sans-serif" font-size="30" fill="#172B38" text-anchor="middle" dominant-baseline="middle" font-weight="400">CPU and RAM limits</text>
+<text x="1265.0" y="382" font-family="Arial, sans-serif" font-size="30" fill="#172B38" text-anchor="middle" dominant-baseline="middle" font-weight="400">No network read only root</text>
+<text x="1265.0" y="420" font-family="Arial, sans-serif" font-size="30" fill="#172B38" text-anchor="middle" dominant-baseline="middle" font-weight="400">Dropped capabilities</text>
+<text x="1265.0" y="458" font-family="Arial, sans-serif" font-size="30" fill="#172B38" text-anchor="middle" dominant-baseline="middle" font-weight="400">Host UID GID and PID limit</text>
+<text x="1265.0" y="496" font-family="Arial, sans-serif" font-size="30" fill="#172B38" text-anchor="middle" dominant-baseline="middle" font-weight="400">Writable temporary /tmp</text>
+<rect x="600" y="570" width="370" height="160" rx="16" fill="#EEF4F7" stroke="#087F70" stroke-width="3"/>
+<text x="785.0" y="608" font-family="Arial, sans-serif" font-size="36" fill="#087F70" text-anchor="middle" dominant-baseline="middle" font-weight="700">Temporary output</text>
+<text x="785.0" y="656" font-family="Arial, sans-serif" font-size="30" fill="#172B38" text-anchor="middle" dominant-baseline="middle" font-weight="400">Temporary bind mount</text>
+<polyline points="390,277 550,277" fill="none" stroke="#2861A6" stroke-width="4" /><polygon points="550,277 533.7919521576518,284.82937961400216 533.7919521576518,269.17062038599784" fill="#2861A6"/>
+<text x="397" y="240" font-family="Arial, sans-serif" font-size="25" fill="#2861A6" text-anchor="start" dominant-baseline="middle" font-weight="400">Claim</text>
+<polyline points="550,385 390,385" fill="none" stroke="#2861A6" stroke-width="4" /><polygon points="390,385 406.2080478423482,377.17062038599784 406.2080478423482,392.82937961400216" fill="#2861A6"/>
+<text x="397" y="423" font-family="Arial, sans-serif" font-size="24" fill="#2861A6" text-anchor="start" dominant-baseline="middle" font-weight="400">Result</text>
+<polyline points="950,340 1050,340" fill="none" stroke="#087F70" stroke-width="4" /><polygon points="1050,340 1033.7919521576518,347.82937961400216 1033.7919521576518,332.17062038599784" fill="#087F70"/>
+<text x="1000" y="305" font-family="Arial, sans-serif" font-size="26" fill="#087F70" text-anchor="middle" dominant-baseline="middle" font-weight="400">Run</text>
+<polyline points="1190,655 1190,700 970,700" fill="none" stroke="#087F70" stroke-width="4" /><polygon points="970,700 986.2080478423482,692.1706203859978 986.2080478423482,707.8293796140022" fill="#087F70"/>
+<text x="1100" y="745" font-family="Arial, sans-serif" font-size="29" fill="#087F70" text-anchor="middle" dominant-baseline="middle" font-weight="400">Write /output</text>
+<polyline points="600,650 570,650 570,470" fill="none" stroke="#087F70" stroke-width="4" /><polygon points="570,470 577.8293796140022,486.2080478423482 562.1706203859978,486.2080478423482" fill="#087F70"/>
+<text x="1015" y="810" font-family="Arial, sans-serif" font-size="28" fill="#172B38" text-anchor="middle" dominant-baseline="middle" font-weight="400">Collect small files then remove temporary execution state</text>
+<text x="800" y="903" font-family="Arial, sans-serif" font-size="27" fill="#172B38" text-anchor="middle" dominant-baseline="middle" font-weight="400">The agent is privileged trusted software containers are not an absolute hostile code boundary</text></svg>

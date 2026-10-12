@@ -1,39 +1,68 @@
-import { clsx } from "clsx";
-import { NavLink } from "react-router-dom";
-
+import { NavLink, Link } from "react-router-dom";
+import { ChevronDown, LogOut, Plus } from "lucide-react";
+import { Logo } from "@/components/common/UI";
+import { useSession } from "@/hooks/useSession";
 import { NAV_ITEMS } from "@/utils/navigation";
-
 export function Sidebar() {
+  const { user, logout } = useSession();
   return (
-    <aside className="flex w-60 shrink-0 flex-col border-r border-surface-800 bg-surface-900">
-      <div className="flex h-16 items-center gap-2 border-b border-surface-800 px-5">
-        <div className="h-2.5 w-2.5 rounded-full bg-accent" aria-hidden="true" />
-        <span className="text-sm font-semibold tracking-wide text-surface-50">NIMBUS</span>
+    <aside className="sidebar">
+      <Link to="/" className="brand-link" aria-label="Nimbus overview">
+        <Logo />
+      </Link>
+      <div className="workspace-switch">
+        <span className="workspace-avatar">N</span>
+        <span>
+          <strong>Compute workspace</strong>
+          <small>Your connected cluster</small>
+        </span>
+        <ChevronDown size={14} />
       </div>
-
-      <nav className="flex-1 space-y-1 px-3 py-4" aria-label="Primary">
+      <p className="sidebar-label">WORKSPACE</p>
+      <nav aria-label="Primary">
         {NAV_ITEMS.map(({ label, to, icon: Icon }) => (
           <NavLink
             key={to}
             to={to}
             end={to === "/"}
-            className={({ isActive }) =>
-              clsx(
-                "focus-ring flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium transition-colors",
-                isActive
-                  ? "bg-surface-800 text-surface-50"
-                  : "text-surface-400 hover:bg-surface-800/60 hover:text-surface-100"
-              )
-            }
+            className={({ isActive }) => `nav-item ${isActive ? "active" : ""}`}
           >
-            <Icon className="h-4 w-4" aria-hidden="true" />
-            {label}
+            <Icon size={18} />
+            <span>{label}</span>
           </NavLink>
         ))}
       </nav>
-
-      <div className="border-t border-surface-800 px-5 py-4 text-xs text-surface-500">
-        v0.1.0 &middot; scaffold
+      <div className="sidebar-bottom">
+        <div className="sidebar-tip">
+          <span className="tip-icon">
+            <Plus size={18} />
+          </span>
+          <strong>Make room for your ideas.</strong>
+          <p>Bring a workload. Nimbus handles the queue.</p>
+          <Link className="button small secondary full" to="/jobs/new">
+            Submit a workload
+            <Plus size={14} />
+          </Link>
+        </div>
+        <div className="user-row">
+          <span className="user-avatar">{user?.username.slice(0, 2).toUpperCase()}</span>
+          <span>
+            <strong>{user?.username}</strong>
+            <small>{user?.is_admin ? "Administrator" : "Member"}</small>
+          </span>
+          <button
+            className="icon-button"
+            aria-label="Sign out"
+            onClick={() => {
+              void logout();
+            }}
+          >
+            <LogOut size={16} />
+          </button>
+        </div>
+        <div className="sidebar-version">
+          Nimbus v0.2 <span>Docker execution</span>
+        </div>
       </div>
     </aside>
   );

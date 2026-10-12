@@ -1,7 +1,7 @@
 .PHONY: up up-prod down build logs ps \
         migrate migrate-new shell-backend shell-db \
         test-backend lint-backend format-backend \
-        lint-frontend format-frontend
+        test-frontend lint-frontend format-frontend
 
 # --- Stack lifecycle ---
 up:            ## Start the full stack in dev mode (hot reload)
@@ -10,8 +10,8 @@ up:            ## Start the full stack in dev mode (hot reload)
 up-prod:       ## Start the full stack using production images
 	docker compose -f docker-compose.yml up --build
 
-down:          ## Stop and remove all containers
-	docker compose down
+down:          ## Stop the local worker and containers; retain database volumes
+	python3 scripts/local.py down
 
 build:         ## Rebuild all images
 	docker compose build
@@ -46,8 +46,23 @@ format-backend:
 	docker compose exec backend ruff format .
 
 # --- Frontend quality ---
+test-frontend:
+	docker compose exec frontend npm test
+
 lint-frontend:
 	docker compose exec frontend npm run lint
 
 format-frontend:
 	docker compose exec frontend npm run format
+
+# Start the stack, then execute jobs through a local Docker worker.
+.PHONY: dev agent
+dev:
+	python3 scripts/local.py up
+
+agent:
+	python3 scripts/local.py agent
+
+.PHONY: stop-agent
+stop-agent:
+	python3 scripts/local.py stop-agent

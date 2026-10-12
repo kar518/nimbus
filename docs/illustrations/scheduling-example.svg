@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="960" viewBox="0 0 1600 960"><text x="800" y="44" font-family="Arial, sans-serif" font-size="40" fill="#172B38" text-anchor="middle" dominant-baseline="middle" font-weight="700">Illustrative scheduling cycle</text>
+<rect x="40" y="105" width="465" height="210" rx="16" fill="#EEF4F7" stroke="#2861A6" stroke-width="3"/>
+<text x="272.5" y="143" font-family="Arial, sans-serif" font-size="36" fill="#2861A6" text-anchor="middle" dominant-baseline="middle" font-weight="700">Queued jobs</text>
+<text x="272.5" y="191" font-family="Arial, sans-serif" font-size="30" fill="#172B38" text-anchor="middle" dominant-baseline="middle" font-weight="400">B priority 80 GPU 4096 MB</text>
+<text x="272.5" y="229" font-family="Arial, sans-serif" font-size="30" fill="#172B38" text-anchor="middle" dominant-baseline="middle" font-weight="400">A priority 20 CPU only</text>
+<text x="272.5" y="267" font-family="Arial, sans-serif" font-size="30" fill="#172B38" text-anchor="middle" dominant-baseline="middle" font-weight="400">D priority 10 CPU only</text>
+<rect x="570" y="105" width="465" height="210" rx="16" fill="#EEF4F7" stroke="#087F70" stroke-width="3"/>
+<text x="802.5" y="143" font-family="Arial, sans-serif" font-size="36" fill="#087F70" text-anchor="middle" dominant-baseline="middle" font-weight="700">Worker C idle</text>
+<text x="802.5" y="191" font-family="Arial, sans-serif" font-size="30" fill="#172B38" text-anchor="middle" dominant-baseline="middle" font-weight="400">4 CPU 4096 MB RAM</text>
+<text x="802.5" y="229" font-family="Arial, sans-serif" font-size="30" fill="#172B38" text-anchor="middle" dominant-baseline="middle" font-weight="400">0 MB GPU memory</text>
+<rect x="1100" y="105" width="460" height="210" rx="16" fill="#EEF4F7" stroke="#7952AD" stroke-width="3"/>
+<text x="1330.0" y="143" font-family="Arial, sans-serif" font-size="36" fill="#7952AD" text-anchor="middle" dominant-baseline="middle" font-weight="700">Worker G idle</text>
+<text x="1330.0" y="191" font-family="Arial, sans-serif" font-size="30" fill="#172B38" text-anchor="middle" dominant-baseline="middle" font-weight="400">8 CPU 8192 MB RAM</text>
+<text x="1330.0" y="229" font-family="Arial, sans-serif" font-size="30" fill="#172B38" text-anchor="middle" dominant-baseline="middle" font-weight="400">8192 MB GPU memory</text>
+<rect x="80" y="390" width="1440" height="98" rx="16" fill="#EEF4F7" stroke="#B8CAD5" stroke-width="3"/>
+<text x="125" y="438" font-family="Arial, sans-serif" font-size="34" fill="#172B38" text-anchor="start" dominant-baseline="middle" font-weight="700">1 Consider B</text>
+<text x="625" y="438" font-family="Arial, sans-serif" font-size="30" fill="#172B38" text-anchor="start" dominant-baseline="middle" font-weight="400">Needs GPU memory</text>
+<text x="1445" y="438" font-family="Arial, sans-serif" font-size="32" fill="#087F70" text-anchor="end" dominant-baseline="middle" font-weight="700">Assign to G</text>
+<rect x="80" y="515" width="1440" height="98" rx="16" fill="#EEF4F7" stroke="#B8CAD5" stroke-width="3"/>
+<text x="125" y="563" font-family="Arial, sans-serif" font-size="34" fill="#172B38" text-anchor="start" dominant-baseline="middle" font-weight="700">2 Consider A</text>
+<text x="625" y="563" font-family="Arial, sans-serif" font-size="30" fill="#172B38" text-anchor="start" dominant-baseline="middle" font-weight="400">Fits remaining CPU worker</text>
+<text x="1445" y="563" font-family="Arial, sans-serif" font-size="32" fill="#087F70" text-anchor="end" dominant-baseline="middle" font-weight="700">Assign to C</text>
+<rect x="80" y="640" width="1440" height="98" rx="16" fill="#EEF4F7" stroke="#B8CAD5" stroke-width="3"/>
+<text x="125" y="688" font-family="Arial, sans-serif" font-size="34" fill="#172B38" text-anchor="start" dominant-baseline="middle" font-weight="700">3 Consider D</text>
+<text x="625" y="688" font-family="Arial, sans-serif" font-size="30" fill="#172B38" text-anchor="start" dominant-baseline="middle" font-weight="400">Both workers now occupied</text>
+<text x="1445" y="688" font-family="Arial, sans-serif" font-size="32" fill="#546675" text-anchor="end" dominant-baseline="middle" font-weight="700">Keep QUEUED</text>
+<text x="800" y="835" font-family="Arial, sans-serif" font-size="32" fill="#172B38" text-anchor="middle" dominant-baseline="middle" font-weight="700">Each worker receives at most one assignment per cycle</text>
+<text x="800" y="890" font-family="Arial, sans-serif" font-size="29" fill="#172B38" text-anchor="middle" dominant-baseline="middle" font-weight="400">A job that cannot fit stays queued while compatible smaller jobs may proceed</text></svg>

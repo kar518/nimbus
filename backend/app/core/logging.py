@@ -7,6 +7,7 @@ Local development emits colorized, human-readable console output.
 
 import logging
 import sys
+from typing import cast
 
 import structlog
 
@@ -23,6 +24,7 @@ def configure_logging() -> None:
         structlog.processors.format_exc_info,
     ]
 
+    processors: list[structlog.types.Processor]
     if settings.ENVIRONMENT == "local":
         processors = [*shared_processors, structlog.dev.ConsoleRenderer()]
     else:
@@ -56,4 +58,4 @@ def configure_logging() -> None:
 
 
 def get_logger(name: str) -> structlog.stdlib.BoundLogger:
-    return structlog.get_logger(name)
+    return cast(structlog.stdlib.BoundLogger, structlog.get_logger(name))

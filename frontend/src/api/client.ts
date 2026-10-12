@@ -1,42 +1,29 @@
 import axios from "axios";
 
-/**
- * Shared Axios instance for all API calls.
- *
- * Base URL comes from `VITE_API_BASE_URL` (see `.env.example`), which
- * points at the FastAPI backend's `/api/v1` prefix. Interceptors below are
- * infrastructure only — no endpoint-specific logic belongs here.
- */
 export const apiClient = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL ?? "http://localhost:8000/api/v1",
+  baseURL: import.meta.env.VITE_API_BASE_URL ?? "/api/v1",
   timeout: 15_000,
-  headers: {
-    "Content-Type": "application/json",
-  },
+  withCredentials: true,
 });
 
-apiClient.interceptors.request.use((config) => {
-  const token = getAuthToken();
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`;
+export function errorMessage(error: unknown): string {
+  if (axios.isAxiosError(error)) {
+    const detail: unknown = error.response?.data?.detail;
+    if (typeof detail === "string") return detail;
+    if (Array.isArray(detail)) return "Some fields are invalid. Check your workload settings.";
+    return error.response
+      ? "This request could not be completed. Please try again."
+      : "Nimbus is unreachable. Check your connection and try again.";
   }
-  return config;
-});
+  return error instanceof Error ? error.message : "Something went wrong. Please try again.";
+}
 
-apiClient.interceptors.response.use(
-  (response) => response,
-  (error) => {
-    // Centralized place to normalize/report API errors once logging
-    // and auth-refresh flows are implemented.
-    return Promise.reject(error);
-  }
-);
-
-/**
- * Reads the current auth token synchronously outside of React.
- * Kept as a thin indirection so the store implementation can change
- * without touching this file.
- */
-function getAuthToken(): string | null {
-  return null;
+export async function downloadFile(path: string, filename: string) {
+  const { data } = await apiClient.get<Blob>(path, { responseType: "blob" });
+  const url = URL.createObjectURL(data);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = filename;
+  link.click();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
 }

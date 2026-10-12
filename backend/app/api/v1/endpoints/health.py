@@ -9,7 +9,7 @@ Health and readiness probes.
 from typing import Literal
 
 import redis.asyncio as redis
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, Response
 from pydantic import BaseModel
 from sqlalchemy import text
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -41,7 +41,7 @@ async def health() -> HealthResponse:
 
 
 @router.get("/ready", response_model=ReadinessResponse)
-async def readiness(db: AsyncSession = Depends(get_db)) -> ReadinessResponse:
+async def readiness(response: Response, db: AsyncSession = Depends(get_db)) -> ReadinessResponse:
     db_status: Literal["ok", "unavailable"] = "ok"
     redis_status: Literal["ok", "unavailable"] = "ok"
 
@@ -51,14 +51,15 @@ async def readiness(db: AsyncSession = Depends(get_db)) -> ReadinessResponse:
         db_status = "unavailable"
 
     try:
-        client = redis.from_url(settings.REDIS_URL)
-        await client.ping()
-        await client.aclose()
+        async with redis.Redis.from_url(settings.REDIS_URL) as client:
+            await client.ping()
     except Exception:
         redis_status = "unavailable"
 
     overall = "ready" if db_status == "ok" and redis_status == "ok" else "not_ready"
 
+    if overall == "not_ready":
+        response.status_code = 503
     return ReadinessResponse(
         status=overall,
         dependencies=DependencyStatus(database=db_status, redis=redis_status),

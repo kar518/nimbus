@@ -27,21 +27,6 @@ logger = get_logger(__name__)
 # worker status changes, job assignment, job status changes, ...).
 EVENT_CHANNEL = "nimbus:events"
 
-_redis_client: redis.Redis | None = None
-
-
-def get_redis_client() -> redis.Redis:
-    """Lazily create and cache a module-level Redis client.
-
-    Lazy so importing this module never opens a connection (e.g. during
-    tests that never publish an event), and cached so repeated publishes
-    don't pay connection setup cost each time.
-    """
-    global _redis_client
-    if _redis_client is None:
-        _redis_client = redis.from_url(settings.REDIS_URL, decode_responses=True)
-    return _redis_client
-
 
 async def publish_event(event_type: str, payload: dict[str, Any]) -> None:
     """Publish a domain event onto the shared Redis channel.
@@ -51,6 +36,8 @@ async def publish_event(event_type: str, payload: dict[str, Any]) -> None:
     whatever JSON-serializable data subscribers need (ids, new status,
     etc).
 
+    Each publish owns its connection, so repeated Celery event loops are safe.
+
     Publishing failures are logged and swallowed rather than raised —
     a Redis blip should never fail the request or task that triggered the
     event (e.g. a worker heartbeat write must succeed even if nobody is
@@ -58,7 +45,7 @@ async def publish_event(event_type: str, payload: dict[str, Any]) -> None:
     """
     message = json.dumps({"type": event_type, "payload": payload})
     try:
-        client = get_redis_client()
-        await client.publish(EVENT_CHANNEL, message)
+        async with redis.Redis.from_url(settings.REDIS_URL, decode_responses=True) as client:
+            await client.publish(EVENT_CHANNEL, message)
     except Exception:
         logger.warning("event_bus.publish_failed", event_type=event_type, exc_info=True)

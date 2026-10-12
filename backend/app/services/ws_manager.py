@@ -83,7 +83,8 @@ class ConnectionManager:
         while not stop_event.is_set():
             client: redis.Redis | None = None
             try:
-                client = redis.from_url(settings.REDIS_URL, decode_responses=True)
+                client = redis.Redis.from_url(settings.REDIS_URL, decode_responses=True)
+                assert client is not None
                 pubsub = client.pubsub()
                 await pubsub.subscribe(EVENT_CHANNEL)
                 try:
@@ -101,7 +102,7 @@ class ConnectionManager:
                         await self.broadcast(data)
                 finally:
                     await pubsub.unsubscribe(EVENT_CHANNEL)
-                    await pubsub.aclose()
+                    await pubsub.aclose()  # type: ignore[no-untyped-call]
             except asyncio.CancelledError:
                 raise
             except Exception:
