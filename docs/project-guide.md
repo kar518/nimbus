@@ -799,6 +799,6 @@ This is the reasoning behind checking the actual process result and retaining se
 
 ## 25 Repository references
 
-The README is the quick-start entry point. docs/architecture.md and docs/operations.md are shorter implementation and operations references. docs/verification.md records the validation scope. This illustrated guide is maintained as docs/project-guide.md with its images under docs/illustrations and docs/screenshots; the editable document is docs/Nimbus_Project_Guide.docx.
+The README is the quick-start entry point. docs/architecture.md and docs/operations.md are shorter implementation and operations references. docs/verification.md records the validation scope. This illustrated guide is maintained as docs/project-guide.md with its images under docs/illustrations and docs/screenshots.
 
 The explanations of current behavior come from the checked-in source paths identified throughout the guide, the dependency manifests and lockfile, the Alembic revisions, and the local verification results. Diagram scenarios with invented job names are teaching examples, not extra performance measurements. When the implementation evolves, update the guide's version, dependency table, limits, and verification evidence together.

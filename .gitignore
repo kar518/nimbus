@@ -39,3 +39,6 @@ Thumbs.db
 celerybeat-schedule*
 
 .nimbus/
+
+# Personal study document; keep only on this machine.
+/docs/Nimbus_Project_Guide.docx

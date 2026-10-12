@@ -72,7 +72,6 @@ React + TypeScript + Vite form the workspace. FastAPI serves authenticated APIs.
 
 - [Architecture and API](docs/architecture.md)
 - [Illustrated project guide](docs/project-guide.md) — learn the implementation and rehearse a project presentation.
-- [Editable Word handbook](docs/Nimbus_Project_Guide.docx)
 - [Operation and deployment](docs/operations.md)
 - [Verification results and limits](docs/verification.md)
 - [Local scripts](scripts/README.md)

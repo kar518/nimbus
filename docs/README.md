@@ -1,7 +1,6 @@
 # Nimbus documentation
 
 - [Illustrated project guide](project-guide.md): the detailed study handbook with diagrams, examples, source walkthroughs, and presentation questions.
-- [Editable Word handbook](Nimbus_Project_Guide.docx): the formatted version for reading and study.
 - [Architecture and API](architecture.md): components, scheduling, state transitions, and endpoint groups.
 - [Operations](operations.md): startup, worker management, deployment settings, and recovery.
 - [Verification](verification.md): checks performed for the current implementation and remaining limits.
